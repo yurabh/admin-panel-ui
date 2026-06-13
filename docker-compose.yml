@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    hostname: web
+    image: ${COMPOSE_PROJECT_NAME}/node
+    user: "${APP_UID:-10000}:${APP_GID:-10000}"
+    build:
+      context: ./docker/node
+      args:
+        NODE_VERSION: ${NODE_VERSION:-20}
+        NPM_VERSION: ${NPM_VERSION:-latest}
+        APP_UID: ${APP_UID:-10000}
+        APP_GID: ${APP_GID:-10000}
+    env_file: .env
+    command: npm run dev -- --host 0.0.0.0
+    ports:
+      - "${VITE_PORT:-5173}:5173"
+    networks:
+      - laravel
+    volumes:
+      - ./:/web
+
+networks:
+  laravel:
+    name: ${COMPOSE_PROJECT_NAME}
