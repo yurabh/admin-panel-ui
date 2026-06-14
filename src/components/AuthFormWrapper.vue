@@ -1,16 +1,14 @@
 <template>
-  <div class="form-container">
-    <div class="form-wrap">
-      <header class="form-header">
-        <slot name="header"></slot>
-      </header>
-      <form class="form" @submit.prevent="emit('submit')">
-        <slot></slot>
-        <footer class="form-footer">
-          <slot name="footer"></slot>
-        </footer>
-      </form>
-    </div>
+  <div class="form-wrap">
+    <header class="form-header">
+      <slot name="header"></slot>
+    </header>
+    <form class="form" @submit.prevent="emit('submit')">
+      <slot></slot>
+      <footer class="form-footer">
+        <slot name="footer"></slot>
+      </footer>
+    </form>
   </div>
 </template>
 
@@ -21,15 +19,6 @@ const emit = defineEmits<{
 </script>
 
 <style scoped>
-.form-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 28px 16px;
-  background-color: #f9fafb;
-}
-
 .form-wrap {
   width: 100%;
   max-width: 480px;
