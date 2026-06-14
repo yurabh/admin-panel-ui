@@ -19,7 +19,8 @@ WORKDIR /web
 
 ARG APP_UID=10000
 ARG APP_GID=10000
-RUN usermod -u ${APP_UID} -g ${APP_GID} node
+RUN groupmod -g ${APP_GID} node && \
+    usermod -u ${APP_UID} node
 
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH=$PATH:/home/node/.npm-global/bin
