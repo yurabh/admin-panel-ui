@@ -11,6 +11,11 @@ import {RouterView} from 'vue-router'
 </script>
 
 <style scoped>
+:global(body) {
+  margin: 0;
+  padding: 0;
+}
+
 .auth-layout {
   display: flex;
   justify-content: center;
