@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <div class="form-wrap">
-      <header class="form-header">
-        <slot name="header"></slot>
-      </header>
-      <form class="form" @submit.prevent="emit('submit')">
-        <slot></slot>
-        <footer class="form-footer">
-          <slot name="footer"></slot>
-        </footer>
-      </form>
-    </div>
+  <div class="form-wrap">
+    <header class="form-header">
+      <slot name="header"></slot>
+    </header>
+    <form class="form" @submit.prevent="emit('submit')">
+      <slot></slot>
+      <footer class="form-footer">
+        <slot name="footer"></slot>
+      </footer>
+    </form>
   </div>
 </template>
 
