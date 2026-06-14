@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import LoginPage from '../pages/LoginPage.vue'
 import authMiddleware from './authMiddleware'
 
 const router = createRouter({
@@ -20,8 +19,9 @@ const router = createRouter({
         {
             path: '/forgot-password',
             name: 'forgot-password',
-            component: LoginPage
-        }
+            component: () => import('@/pages/auth/LoginPage.vue'),
+            meta: {requiresAuth: false},
+        },
     ]
 })
 
