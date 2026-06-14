@@ -7,9 +7,15 @@ const router = createRouter({
     routes: [
         {
             path: '/login',
-            name: 'login',
-            component: LoginPage,
-            meta: {requiresAuth: false}
+            component: () => import('@/layouts/AuthLayout.vue'),
+            meta: {requiresAuth: false},
+            children: [
+                {
+                    path: '',
+                    name: 'login',
+                    component: () => import('@/pages/auth/LoginPage.vue'),
+                },
+            ],
         },
         {
             path: '/forgot-password',
