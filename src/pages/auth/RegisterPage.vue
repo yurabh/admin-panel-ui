@@ -2,11 +2,22 @@
   <AuthFormWrapper @submit="handleFormSubmit">
 
     <template #header>
-      Welcome back. Don't have an account?
-      <RouterLink class="accent-link" :to="{ name: 'register' }">
-        Register now
+      Already have an account?
+      <RouterLink class="accent-link" :to="{ name: 'login' }">
+        Sign in
       </RouterLink>
     </template>
+
+    <FormRow>
+      <AppInput
+          v-model="credentials.name"
+          label="Name"
+          type="text"
+          size="large"
+          placeholder="John Doe"
+          required
+      />
+    </FormRow>
 
     <FormRow>
       <AppInput
@@ -16,11 +27,7 @@
           size="large"
           placeholder="your@email.com"
           required
-      >
-        <template #error>
-          <div>Email is required</div>
-        </template>
-      </AppInput>
+      />
     </FormRow>
 
     <FormRow>
@@ -30,35 +37,36 @@
           size="large"
           placeholder="••••••••"
           required
-      >
-        <template #error>
-          <div>Password is required</div>
-        </template>
-      </PasswordInput>
+      />
     </FormRow>
 
-    <p class="forgot-password">
-      <RouterLink :to="{ name: 'forgot-password' }">
-        Forgot password?
-      </RouterLink>
-    </p>
+    <FormRow>
+      <PasswordInput
+          v-model="credentials.password_confirmation"
+          label="Confirm password"
+          size="large"
+          placeholder="••••••••"
+          required
+      />
+    </FormRow>
 
     <ErrorMessage :message="error"/>
 
     <template #footer>
       <AppButton
-          label="Sign in"
-          loading-label="Checking..."
+          label="Register"
+          loading-label="Creating account..."
           :loading="isLoading"
           size="large"
           type="submit"
       />
     </template>
+
   </AuthFormWrapper>
 </template>
 
 <script setup lang="ts">
-import {useLogin} from '@/composables/useLogin'
+import {useRegister} from '@/composables/useRegister'
 import AuthFormWrapper from '@/components/AuthFormWrapper.vue'
 import AppInput from '@/components/form/AppInput.vue'
 import PasswordInput from '@/components/form/PasswordInput.vue'
@@ -66,7 +74,7 @@ import FormRow from '@/components/form/FormRow.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import ErrorMessage from '@/components/ui/ErrorMessage.vue'
 
-const {credentials, handleFormSubmit, isLoading, error} = useLogin()
+const {credentials, handleFormSubmit, isLoading, error} = useRegister()
 </script>
 
 <style scoped>
@@ -77,21 +85,6 @@ const {credentials, handleFormSubmit, isLoading, error} = useLogin()
 }
 
 .accent-link:hover {
-  text-decoration: underline;
-}
-
-.forgot-password {
-  text-align: right;
-  margin-bottom: 0.5rem;
-}
-
-.forgot-password a {
-  font-size: 0.875rem;
-  color: #2563eb;
-  text-decoration: none;
-}
-
-.forgot-password a:hover {
   text-decoration: underline;
 }
 </style>
