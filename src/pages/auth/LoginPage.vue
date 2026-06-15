@@ -1,12 +1,12 @@
 <template>
   <AuthFormWrapper @submit="handleFormSubmit">
 
-    <!--    <template #header>-->
-    <!--      Welcome back. Don't have an account?-->
-    <!--      <RouterLink class="accent-link" :to="{ name: 'register' }">-->
-    <!--        Register now-->
-    <!--      </RouterLink>-->
-    <!--    </template>-->
+    <template #header>
+      Welcome back. Don't have an account?
+      <RouterLink class="accent-link" :to="{ name: 'register' }">
+        Register now
+      </RouterLink>
+    </template>
 
     <FormRow>
       <AppInput
