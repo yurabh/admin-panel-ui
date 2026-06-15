@@ -4,6 +4,7 @@ export enum Store {
 
 export enum BackendEndpoint {
     Login = '/api/login',
+    Registration = '/api/register',
 }
 
 export interface LoginRequest {
@@ -20,4 +21,11 @@ export interface LoginResponse {
         email: string
         role: string
     }
+}
+
+export interface RegisterRequest {
+    name: string
+    email: string
+    password: string
+    role?: string | null
 }
