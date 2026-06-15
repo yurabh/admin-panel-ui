@@ -40,6 +40,16 @@
       />
     </FormRow>
 
+    <FormRow>
+      <PasswordInput
+          v-model="credentials.password_confirmation"
+          label="Confirm password"
+          size="large"
+          placeholder="••••••••"
+          required
+      />
+    </FormRow>
+
     <ErrorMessage :message="error"/>
 
     <template #footer>

@@ -10,6 +10,7 @@ export function useRegister() {
         name: '',
         email: '',
         password: '',
+        password_confirmation: '',
     })
 
     async function handleFormSubmit(): Promise<void> {
@@ -18,6 +19,7 @@ export function useRegister() {
                 name: credentials.name,
                 email: credentials.email,
                 password: credentials.password,
+                password_confirmation: credentials.password_confirmation,
             })
             await router.push({name: 'dashboard'})
         } catch {
