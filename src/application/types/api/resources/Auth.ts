@@ -5,6 +5,8 @@ export enum Store {
 export enum BackendEndpoint {
     Login = '/api/login',
     Registration = '/api/register',
+    ForgotPassword = '/api/forgot/password',
+    ResetPassword = '/api/password/reset',
 }
 
 export interface LoginRequest {
@@ -29,4 +31,15 @@ export interface RegisterRequest {
     password: string
     password_confirmation: string
     role?: string | null
+}
+
+export interface ForgotPasswordRequest {
+    email: string
+}
+
+export interface ResetPasswordRequest {
+    token: string
+    email: string
+    password: string
+    password_confirmation: string
 }

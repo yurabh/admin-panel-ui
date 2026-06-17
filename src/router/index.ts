@@ -30,10 +30,28 @@ const router = createRouter({
         },
         {
             path: '/forgot-password',
-            name: 'forgot-password',
-            component: () => import('@/pages/auth/LoginPage.vue'),
+            component: () => import('@/layouts/AuthLayout.vue'),
             meta: {requiresAuth: false},
+            children: [
+                {
+                    path: '',
+                    name: 'forgot-password',
+                    component: () => import('@/pages/auth/ForgotPasswordPage.vue'),
+                },
+            ],
         },
+        {
+            path: '/reset-password',
+            component: () => import('@/layouts/AuthLayout.vue'),
+            meta: {requiresAuth: false},
+            children: [
+                {
+                    path: '',
+                    name: 'reset-password',
+                    component: () => import('@/pages/auth/ResetPasswordPage.vue'),
+                },
+            ],
+        }
     ]
 })
 
