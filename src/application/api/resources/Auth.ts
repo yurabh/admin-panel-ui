@@ -1,9 +1,9 @@
 import type StandardClient from "@/application/api/StandardClient.ts";
 import {
-    BackendEndpoint,
+    BackendEndpoint, type ForgotPasswordRequest,
     type LoginRequest,
     type LoginResponse,
-    type RegisterRequest
+    type RegisterRequest, type ResetPasswordRequest
 } from "@/application/types/api/resources/Auth.ts";
 
 export default class Auth {
@@ -16,5 +16,13 @@ export default class Auth {
 
     register(credentials: RegisterRequest): Promise<LoginResponse> {
         return this.apiClient.post<LoginResponse, RegisterRequest>(BackendEndpoint.Registration, credentials)
+    }
+
+    forgotPassword(credentials: ForgotPasswordRequest): Promise<void> {
+        return this.apiClient.post(BackendEndpoint.ForgotPassword, credentials)
+    }
+
+    resetPassword(credentials: ResetPasswordRequest): Promise<void> {
+        return this.apiClient.post(BackendEndpoint.ResetPassword, credentials)
     }
 }
