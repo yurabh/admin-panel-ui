@@ -26,7 +26,8 @@ export const useAuthStore = defineStore('auth', () => {
         isLoading.value = true
         error.value = null
         try {
-            const data = await authClient.login(credentials)
+            const response = await authClient.login(credentials) as any
+            const data = response.data || response
             authToken.value = data.access_token
             user.value = data.user
         } catch (err: any) {
@@ -41,7 +42,8 @@ export const useAuthStore = defineStore('auth', () => {
         isLoading.value = true
         error.value = null
         try {
-            const data = await authClient.register(credentials)
+            const response = await authClient.register(credentials) as any
+            const data = response.data || response
             authToken.value = data.access_token
             user.value = data.user
         } catch (err: any) {
