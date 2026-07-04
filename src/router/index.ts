@@ -51,6 +51,23 @@ const router = createRouter({
                     component: () => import('@/pages/auth/ResetPasswordPage.vue'),
                 },
             ],
+        },
+        {
+            path: '/',
+            component: () => import('@/layouts/DashboardLayout.vue'),
+            meta: {requiresAuth: true},
+            children: [
+                {
+                    path: '',
+                    name: 'dashboard',
+                    component: () => import('@/pages/DashboardPage.vue'),
+                },
+                {
+                    path: 'posts',
+                    name: 'posts',
+                    component: () => import('@/pages/posts/PostsPage.vue'),
+                }
+            ]
         }
     ]
 })
