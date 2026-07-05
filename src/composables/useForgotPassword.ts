@@ -1,4 +1,4 @@
-import {reactive} from 'vue'
+import {reactive, computed} from 'vue'
 import {useAuthStore} from '@/stores/auth'
 
 export function useForgotPassword() {
@@ -18,7 +18,7 @@ export function useForgotPassword() {
     return {
         credentials: credentials,
         handleFormSubmit,
-        isLoading: authStore.isLoading,
-        error: authStore.error,
+        isLoading: computed(() => authStore.isLoading),
+        error: computed(() => authStore.error),
     }
 }

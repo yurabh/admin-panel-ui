@@ -37,7 +37,9 @@ export function usePosts() {
             const res = await postClient.index() as any
             posts.value = res.data || res
         } catch (err: any) {
-            listError.value = err.data?.message || err.message || 'Failed to load posts'
+            listError.value = handlePostError(err,
+                'You are not authorized to view posts. Administrator privileges required.',
+                'Failed to load posts')
         } finally {
             isLoading.value = false
         }
@@ -104,7 +106,9 @@ export function usePosts() {
             }
             closeModal()
         } catch (err: any) {
-            formError.value = err.data?.message || err.message || 'Something went wrong'
+            formError.value = handlePostError(err,
+                'You cannot create or modify posts because you do not have administrator privileges.',
+                'Something went wrong')
         } finally {
             isSaving.value = false
         }
@@ -142,4 +146,17 @@ export function usePosts() {
         handleSubmit,
         handleDelete,
     }
+}
+
+function handlePostError(err: any, forbiddenMessage: string, fallbackMessage: string): string {
+    const isForbidden = err.status === 403 ||
+        err.response?.status === 403 ||
+        err.data?.message === 'Forbidden' ||
+        err.message?.includes('403')
+
+    if (isForbidden) {
+        return forbiddenMessage
+    }
+
+    return err.data?.message || err.message || fallbackMessage
 }

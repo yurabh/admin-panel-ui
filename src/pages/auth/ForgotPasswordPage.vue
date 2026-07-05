@@ -41,8 +41,16 @@ import AppInput from '@/components/form/AppInput.vue'
 import FormRow from '@/components/form/FormRow.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import ErrorMessage from '@/components/ui/ErrorMessage.vue'
+import {onMounted} from "vue";
+import {useAuthStore} from "@/stores/auth.ts";
+
+const authStore = useAuthStore()
 
 const {credentials, handleFormSubmit, isLoading, error} = useForgotPassword()
+
+onMounted(() => {
+  authStore.clearError()
+})
 </script>
 
 <style scoped>

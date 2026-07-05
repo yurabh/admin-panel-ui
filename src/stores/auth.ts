@@ -17,7 +17,12 @@ export const useAuthStore = defineStore('auth', () => {
     const authClient = new Auth(apiClient)
 
     const authToken = useStorage<string | undefined>(Store.AuthToken, undefined)
-    const user = useStorage<LoginResponse['user'] | null>('user', null)
+    const user = useStorage<LoginResponse['user'] | null>('user', null, localStorage, {
+        serializer: {
+            read: (v) => v ? JSON.parse(v) : null,
+            write: (v) => JSON.stringify(v)
+        }
+    })
     const isLoading = ref<boolean>(false)
     const error = ref<string | null>(null)
     const isAuthenticated = computed<boolean>(() => !!authToken.value)
@@ -31,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
             authToken.value = data.access_token
             user.value = data.user
         } catch (err: any) {
-            error.value = err.data?.message || err.message || 'Auth filed'
+            error.value = err.response?.data?.message || err.data?.message || err.message || 'Auth failed'
             throw err
         } finally {
             isLoading.value = false
@@ -60,7 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
         try {
             await authClient.forgotPassword(credentials)
         } catch (err: any) {
-            error.value = err.data?.message || err.message || 'Error'
+            error.value = parseServerError(err, "We can't find a user with that email address.")
             throw err
         } finally {
             isLoading.value = false
@@ -85,6 +90,10 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = null
     }
 
+    function clearError(): void {
+        error.value = null
+    }
+
     return {
         token: authToken,
         user,
@@ -95,6 +104,21 @@ export const useAuthStore = defineStore('auth', () => {
         logout,
         register,
         forgotPassword,
-        resetPassword
+        resetPassword,
+        clearError
     }
 })
+
+function parseServerError(err: any, fallbackMessage: string): string {
+    const rawMessage = err.response?.data?.message || err.data?.message || err.response?.data || err.data;
+
+    if (typeof rawMessage === 'string' && !rawMessage.includes('[POST]')) {
+        return rawMessage;
+    }
+
+    if (err.message && !err.message.includes('[POST]')) {
+        return err.message;
+    }
+
+    return fallbackMessage;
+}
