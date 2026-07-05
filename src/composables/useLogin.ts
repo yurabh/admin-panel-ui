@@ -1,4 +1,4 @@
-import {reactive} from 'vue'
+import {reactive, computed} from 'vue'
 import {useRouter} from 'vue-router'
 import {useAuthStore} from '@/stores/auth'
 
@@ -25,7 +25,7 @@ export function useLogin() {
     return {
         credentials,
         handleFormSubmit,
-        isLoading: authStore.isLoading,
-        error: authStore.error,
+        isLoading: computed(() => authStore.isLoading),
+        error: computed(() => authStore.error),
     }
 }
