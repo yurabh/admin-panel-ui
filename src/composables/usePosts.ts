@@ -34,7 +34,8 @@ export function usePosts() {
         isLoading.value = true
         listError.value = null
         try {
-            posts.value = await postClient.index()
+            const res = await postClient.index() as any
+            posts.value = res.data || res
         } catch (err: any) {
             listError.value = err.data?.message || err.message || 'Failed to load posts'
         } finally {
@@ -44,7 +45,8 @@ export function usePosts() {
 
     async function fetchCategories(): Promise<void> {
         try {
-            categories.value = await categoryClient.index()
+            const res = await categoryClient.index() as any
+            categories.value = res.data || res
         } catch {
         }
     }
