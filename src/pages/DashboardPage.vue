@@ -5,9 +5,9 @@
 
     <StatsGrid>
       <StatCard label="Posts" :value="postsCount" :to="{ name: 'posts' }"/>
-<!--      <StatCard label="Categories" :value="categoriesCount" :to="{ name: 'categories' }"/>-->
-<!--      <StatCard label="Tags" value="—" :to="{ name: 'tags' }"/>-->
-<!--      <StatCard label="Comments" value="—" :to="{ name: 'comments' }"/>-->
+      <StatCard label="Categories" :value="categoriesCount" :to="{ name: 'categories' }"/>
+      <!--      <StatCard label="Tags" value="—" :to="{ name: 'tags' }"/>-->
+      <!--      <StatCard label="Comments" value="—" :to="{ name: 'comments' }"/>-->
     </StatsGrid>
   </div>
 </template>
