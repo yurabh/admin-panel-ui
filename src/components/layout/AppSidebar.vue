@@ -20,10 +20,9 @@ const navItems = [
   {name: 'posts', label: 'Posts'},
   {name: 'categories', label: 'Categories'},
   // {name: 'tags', label: 'Tags'},
-  // {name: 'comments', label: 'Comments'},
+  {name: 'comments', label: 'Comments'},
   // {name: 'pages', label: 'Pages'},
   {name: 'users', label: 'Users'},
-  // {name: 'settings', label: 'Settings'},
   // {name: 'billing', label: 'Billing'},
 ]
 

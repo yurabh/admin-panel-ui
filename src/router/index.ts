@@ -73,9 +73,19 @@ const router = createRouter({
                     component: () => import('@/pages/categories/CategoriesPage.vue'),
                 },
                 {
+                    path: 'tags',
+                    name: 'tags',
+                    component: () => import('@/pages/tags/TagsPage.vue'),
+                },
+                {
                     path: 'users',
                     name: 'users',
                     component: () => import('@/pages/users/UsersPage.vue'),
+                },
+                {
+                    path: 'comments',
+                    name: 'comments',
+                    component: () => import('@/pages/comments/CommentsPage.vue'),
                 }
             ]
         }
