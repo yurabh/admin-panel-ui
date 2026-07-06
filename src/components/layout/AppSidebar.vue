@@ -18,7 +18,7 @@ const router = useRouter()
 const navItems = [
   {name: 'dashboard', label: 'Dashboard'},
   {name: 'posts', label: 'Posts'},
-  // {name: 'categories', label: 'Categories'},
+  {name: 'categories', label: 'Categories'},
   // {name: 'tags', label: 'Tags'},
   // {name: 'comments', label: 'Comments'},
   // {name: 'pages', label: 'Pages'},
