@@ -66,6 +66,11 @@ const router = createRouter({
                     path: 'posts',
                     name: 'posts',
                     component: () => import('@/pages/posts/PostsPage.vue'),
+                },
+                {
+                    path: 'categories',
+                    name: 'categories',
+                    component: () => import('@/pages/categories/CategoriesPage.vue'),
                 }
             ]
         }
