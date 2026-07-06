@@ -76,6 +76,11 @@ const router = createRouter({
                     path: 'users',
                     name: 'users',
                     component: () => import('@/pages/users/UsersPage.vue'),
+                },
+                {
+                    path: 'comments',
+                    name: 'comments',
+                    component: () => import('@/pages/comments/CommentsPage.vue'),
                 }
             ]
         }
