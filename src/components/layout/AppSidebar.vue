@@ -22,7 +22,7 @@ const navItems = [
   // {name: 'tags', label: 'Tags'},
   // {name: 'comments', label: 'Comments'},
   // {name: 'pages', label: 'Pages'},
-  // {name: 'users', label: 'Users'},
+  {name: 'users', label: 'Users'},
   // {name: 'settings', label: 'Settings'},
   // {name: 'billing', label: 'Billing'},
 ]
