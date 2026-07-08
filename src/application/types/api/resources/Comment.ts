@@ -21,8 +21,8 @@ export interface Comment {
 }
 
 export enum BackendEndpoint {
-    Comments = '/api/admin/comments',
-    Comment = '/api/admin/comments',
+    Comments = '/api/comments',
+    Comment = '/api/comments',
 }
 
 export interface StoreCommentRequest {
