@@ -22,7 +22,7 @@ const navItems = [
   {name: 'tags', label: 'Tags'},
   {name: 'comments', label: 'Comments'},
   {name: 'users', label: 'Users'},
-  // {name: 'billing', label: 'Billing'},
+  {name: 'billing', label: 'Billing'},
 ]
 
 function handleLogout(): void {
