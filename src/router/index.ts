@@ -86,7 +86,17 @@ const router = createRouter({
                     path: 'comments',
                     name: 'comments',
                     component: () => import('@/pages/comments/CommentsPage.vue'),
-                }
+                },
+                {
+                    path: 'billing',
+                    name: 'billing',
+                    component: () => import('@/pages/billing/BillingPage.vue'),
+                },
+                {
+                    path: 'billing/success',
+                    name: 'billing-success',
+                    component: () => import('@/pages/billing/SubscriptionSuccessPage.vue'),
+                },
             ]
         }
     ]
