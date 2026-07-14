@@ -1,8 +1,12 @@
 Markdown#
 
-Admin Panel — Vue 3 + TypeScript
+# CLAUDE.md
 
-Frontend of a Laravel-backed admin panel for a blog system (posts, categories, users, comments, tags, pages).
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+# Admin Panel — Vue 3 + TypeScript
+
+Frontend of a Laravel-backed admin panel for a blog system (posts, categories, users, comments, tags, billing/subscriptions).
 
 ## Stack
 
@@ -13,6 +17,23 @@ Frontend of a Laravel-backed admin panel for a blog system (posts, categories, u
 - `ofetch` wrapped in `StandardClient`
 - `@vueuse/core` (`useStorage`)
 - Vite
+
+## Commands
+
+```bash
+npm run dev       # start Vite dev server on :5173
+npm run build     # type-check (vue-tsc) then production build to dist/
+npm run preview   # preview the production build locally
+```
+
+There is no test suite and no configured linter in this project — do not
+invent `npm run test` or `npm run lint` commands. To type-check without a
+full build, run `npx vue-tsc --noEmit`.
+
+The dev server expects `VITE_SERVER_URL` (Laravel API base URL) in `.env`
+(see `src/env.d.ts` / `src/plugins/apiClients.ts`). A Docker Compose setup
+(`docker-compose.yml`, `docker/node`) runs `npm run dev` inside a container
+on the same port if the user prefers that over a local Node install.
 
 ## Folder structure
 
@@ -41,12 +62,15 @@ src/
 │   ├── dashboard/                     # StatsGrid, StatCard
 │   ├── posts/                         # PostsTable, PostsTableRow, PostFormModal
 │   ├── categories/                    # CategoriesTable, etc.
+│   ├── tags/ users/ comments/ billing/ # same table/row/form-modal shape per resource
 │   └── AuthFormWrapper.vue
 ├── composables/
 │   ├── useApiClients.ts               # inject the shared StandardClient
 │   ├── useResource.ts                 # UNIVERSAL CRUD composable — see below
 │   ├── usePosts.ts                    # thin wrapper around useResource
 │   ├── useCategories.ts               # thin wrapper around useResource
+│   ├── useTags.ts / useUsers.ts / useComments.ts # more useResource wrappers
+│   ├── useBilling.ts                  # subscription/billing state (not useResource-based)
 │   ├── useDashboardStats.ts
 │   ├── useLogin.ts / useRegister.ts / useForgotPassword.ts / useResetPassword.ts
 ├── layouts/
@@ -56,6 +80,7 @@ src/
 │   ├── auth/                          # LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage
 │   ├── posts/PostsPage.vue
 │   ├── categories/CategoriesPage.vue
+│   ├── tags/ users/ comments/ billing/ # TagsPage, UsersPage, CommentsPage, BillingPage, SubscriptionSuccessPage
 │   └── DashboardPage.vue
 ├── plugins/apiClients.ts              # provides StandardClient via app.provide
 ├── router/
