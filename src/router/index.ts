@@ -97,6 +97,11 @@ const router = createRouter({
                     name: 'billing-success',
                     component: () => import('@/pages/billing/SubscriptionSuccessPage.vue'),
                 },
+                {
+                    path: 'shopify',
+                    name: 'shopify',
+                    component: () => import('@/pages/shopify/ShopifyPage.vue'),
+                },
             ]
         }
     ]
