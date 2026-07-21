@@ -18,7 +18,7 @@ export function useShopify() {
         try {
             products.value = await client.getProducts()
         } catch (e) {
-            error.value = 'Failed to load products'
+            error.value = extractError(e, 'Failed to load products')
         } finally {
             isLoading.value = false
         }
@@ -29,7 +29,7 @@ export function useShopify() {
         try {
             orders.value = await client.getOrders()
         } catch (e) {
-            error.value = 'Failed to load orders'
+            error.value = extractError(e, 'Failed to load orders')
         } finally {
             isLoading.value = false
         }
@@ -42,7 +42,7 @@ export function useShopify() {
             await fetchProducts()
             await fetchOrders()
         } catch (e) {
-            error.value = 'Sync failed'
+            error.value = extractError(e, 'Could not sync products and orders')
         } finally {
             isSyncing.value = false
         }
@@ -54,4 +54,9 @@ export function useShopify() {
     })
 
     return {products, orders, isLoading, isSyncing, error, syncNow, fetchProducts, fetchOrders}
+}
+
+
+function extractError(err: any, fallback: string): string {
+    return err.data?.message || err.response?.data?.message || err.message || fallback
 }
